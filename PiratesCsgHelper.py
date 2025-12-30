@@ -76,9 +76,9 @@ def getCoinDistribution(totalCoins, totalTreasure, players, maxCoinVal):
     # So I developed my algorithm to create that kind of outcome.
     coinList = []
 
-    countdownCoint = maxCoinVal
-    while (countdownCoint > 0):
-        coinQty = countdownCoint
+    countdownCoin = maxCoinVal
+    while (countdownCoin > 0):
+        coinQty = countdownCoin
 
         # Make the candidate list
         # We will need to check to see if it has too many coins or value
@@ -86,17 +86,16 @@ def getCoinDistribution(totalCoins, totalTreasure, players, maxCoinVal):
         # if so, we reduce the maximum coin value, and try again.
         candidateCoinList = []
 
-
         # Add a number and value of coins based on the max value coin
         # For example, if the max value coin is 5, add five 1 valued coins, then four 2 valued coins,
         # And so on until we add one 5 valued coin and cannot decrement any more.
-        for i in range(1, countdownCoint + 1):
+        for i in range(1, countdownCoin + 1):
             while(coinQty > 0):
                 candidateCoinList.append(i)
                 coinQty -= 1
 
             # Set the coin quanitity for the next batch to add.
-            coinQty = countdownCoint - i
+            coinQty = countdownCoin - i
 
         # Check to see if the number and total value of coins added can be added again.
         if (len(coinList) + len(candidateCoinList) < totalCoins and
@@ -104,7 +103,7 @@ def getCoinDistribution(totalCoins, totalTreasure, players, maxCoinVal):
             coinList += candidateCoinList
         # If not, try again with a smaller range
         else:
-            countdownCoint -= 1
+            countdownCoin -= 1
 
     # There may be coins and treasure value remaining after this.
     # Check to see which is greater, as they require different actions.
@@ -172,3 +171,4 @@ def getCoinDistribution(totalCoins, totalTreasure, players, maxCoinVal):
 
 
 main()
+
